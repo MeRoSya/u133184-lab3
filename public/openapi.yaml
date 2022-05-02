@@ -1,8 +1,418 @@
-openapi: '3.0.0'
+openapi: "3.0.0"
 info:
   title: Online Store
-  version: '1.0'
+  version: "1.0"
   contact:
-      email: zhuga200117@gmail.com
+    email: zhuga200117@gmail.com
 servers:
   - url: http://u133184-lab3.local/v1
+
+paths:
+  /customers:
+    get:
+      summary: List all customers
+      operationId: listCustomers
+      tags:
+        - customers
+      parameters:
+        - name: include
+          in: query
+          description: Which children should be included
+          required: false
+          schema:
+            type: array
+            items:
+              enum:
+                - orders
+                - addresses
+              type: string
+      responses:
+        "200":
+          description: An array of customers
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customers"
+        "404":
+          description: Cannot find an array of customers
+  /orders:
+    post:
+      summary: Create an order
+      operationId: createOrder
+      tags:
+        - orders
+      parameters:
+        - name: address_id
+          in: query
+          description: Id of the address
+          required: true
+          schema:
+            type: integer
+        - name: customer_id
+          in: query
+          description: Id of the customer
+          required: true
+          schema:
+            type: integer
+        - name: creation_time
+          in: query
+          description: Time of creation
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: deliver_before
+          in: query
+          description: Deliver order before
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: cost
+          in: query
+          description: The cost of the order
+          required: true
+          schema:
+            type: integer
+        - name: payed
+          in: query
+          description: Is order payed
+          required: true
+          schema:
+            type: boolean
+        - name: delivered
+          in: query
+          description: Is order delivered
+          required: true
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: The order created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Order"
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+        "400":
+          description: Missing some required parameters
+  /orders/{id}:
+    patch:
+      summary: Change an order
+      operationId: changeOrder
+      tags:
+        - orders
+      parameters:
+        - name: address_id
+          in: query
+          description: Id of the address
+          required: false
+          schema:
+            type: integer
+        - name: customer_id
+          in: query
+          description: Id of the customer
+          required: false
+          schema:
+            type: integer
+        - name: creation_time
+          in: query
+          description: Time of creation
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: deliver_before
+          in: query
+          description: Deliver order before
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: cost
+          in: query
+          description: The cost of the order
+          required: false
+          schema:
+            type: integer
+        - name: payed
+          in: query
+          description: Is order payed
+          required: false
+          schema:
+            type: boolean
+        - name: delivered
+          in: query
+          description: Is order delivered
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: The order changed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Order"
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+        "404":
+          description: The order not found
+    delete:
+      summary: Delete an order
+      operationId: deleteOrder
+      tags:
+        - orders
+      responses:
+        "200":
+          description: "Order is deleted"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    enum:
+                      - null
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+  /addresses/{id}:
+    post:
+      summary: Create an address
+      operationId: createAddress
+      tags:
+        - addresses
+      parameters:
+        - name: customer_id
+          in: query
+          description: Id of owner customer
+          required: true
+          schema:
+            type: string
+        - name: city
+          in: query
+          description: City
+          required: true
+          schema:
+            type: string
+        - name: street
+          in: query
+          description: Street
+          required: true
+          schema:
+            type: string
+        - name: building
+          in: query
+          description: Building
+          required: true
+          schema:
+            type: string
+        - name: floor
+          in: query
+          description: Floor
+          required: true
+          schema:
+            type: integer
+        - name: flat
+          in: query
+          description: Flat
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: New address
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Address"
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+    put:
+      summary: Replace an address
+      operationId: replaceAddress
+      tags:
+        - addresses
+      parameters:
+        - name: customer_id
+          in: query
+          description: Id of owner customer
+          required: true
+          schema:
+            type: string
+        - name: city
+          in: query
+          description: City
+          required: true
+          schema:
+            type: string
+        - name: street
+          in: query
+          description: Street
+          required: true
+          schema:
+            type: string
+        - name: building
+          in: query
+          description: Building
+          required: true
+          schema:
+            type: string
+        - name: floor
+          in: query
+          description: Floor
+          required: true
+          schema:
+            type: integer
+        - name: flat
+          in: query
+          description: Flat
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: New address
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Address"
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+        address:
+          $ref: "#/components/schemas/AddressAsSub"
+        customer:
+          $ref: "#/components/schemas/CustomerAsSub"
+        creation_time:
+          type: string
+          format: date-time
+        deliver_before:
+          type: string
+          format: date-time
+        cost:
+          type: integer
+        payed:
+          type: boolean
+        delivered:
+          type: boolean
+
+    Address:
+      type: object
+      properties:
+        id:
+          type: integer
+        customer:
+            $ref: "#/components/schemas/CustomerAsSub"
+        city:
+          type: string
+        street:
+          type: string
+        building:
+          type: string
+        floor:
+          type: integer
+        flat:
+          type: string
+    
+    AddressAsSub:
+      type: object
+      properties:
+        id:
+          type: integer
+        city:
+          type: string
+        street:
+          type: string
+        building:
+          type: string
+        floor:
+          type: integer
+        flat:
+          type: string
+
+    CustomerAsSub:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+    Customer:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: "#/components/schemas/AddressAsSub"
+        orders:
+          type: array
+          items:
+            $ref: "#/components/schemas/Order"
+
+    Customers:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Customer"
+        errors:
+          type: array
+          items:
+            $ref: "#/components/schemas/Error"
+
+    Error:
+      type: object
+      required:
+        - "code"
+        - "message"
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        meta:
+          type: object
