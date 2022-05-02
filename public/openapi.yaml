@@ -1,0 +1,8 @@
+openapi: '3.0.0'
+info:
+  title: Online Store
+  version: '1.0'
+  contact:
+      email: zhuga200117@gmail.com
+servers:
+  - url: http://u133184-lab3.local/v1
