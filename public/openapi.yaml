@@ -33,8 +33,57 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Customers"
+        "400":
+          description: Invalid parameters in the request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    enum:
+                      - null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
         "404":
-          description: Cannot find an array of customers
+          description: No customers found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    enum:
+                      - null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    enum:
+                      - null
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
   /orders:
     post:
       summary: Create an order
@@ -96,12 +145,59 @@ paths:
                 properties:
                   data:
                     $ref: "#/components/schemas/Order"
+                  meta:
+                    type: object
+        "400":
+          description: Missing some required parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    enum:
+                      - null
                   errors:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
-        "400":
-          description: Missing some required parameters
+                  meta:
+                    type: object
+        "404":
+          description: No orders found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    enum:
+                      - null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    enum:
+                      - null
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
   /orders/{id}:
     patch:
       summary: Change an order
@@ -167,8 +263,42 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
         "404":
           description: The order not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    enum:
+                      - null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    enum:
+                      - null
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
     delete:
       summary: Delete an order
       operationId: deleteOrder
@@ -186,10 +316,25 @@ paths:
                     enum:
                       - null
                     type: string
+                  meta:
+                    type: object
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    enum:
+                      - null
+                    type: string
                   errors:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
   /addresses/{id}:
     post:
       summary: Create an address
@@ -247,6 +392,42 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        "400":
+          description: Missing some required parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    enum:
+                      - null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    enum:
+                      - null
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
     put:
       summary: Replace an address
       operationId: replaceAddress
@@ -303,6 +484,59 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        "400":
+          description: Missing some required parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    enum:
+                      - null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        "404":
+          description: No orders found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    enum:
+                      - null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    enum:
+                      - null
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
 
 components:
   schemas:
@@ -334,7 +568,7 @@ components:
         id:
           type: integer
         customer:
-            $ref: "#/components/schemas/CustomerAsSub"
+          $ref: "#/components/schemas/CustomerAsSub"
         city:
           type: string
         street:
@@ -345,7 +579,7 @@ components:
           type: integer
         flat:
           type: string
-    
+
     AddressAsSub:
       type: object
       properties:
@@ -399,10 +633,8 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Customer"
-        errors:
-          type: array
-          items:
-            $ref: "#/components/schemas/Error"
+        meta:
+          type: object
 
     Error:
       type: object
