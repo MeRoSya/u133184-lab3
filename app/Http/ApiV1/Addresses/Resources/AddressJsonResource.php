@@ -12,16 +12,26 @@ class AddressJsonResource extends CommonJsonResource
 {
     public function toArray($request)
     {
-        $toReturn = parent::toArray($request);
-        $toReturn['data'] = [
-            'id' => $this->id,
-            'customer' => new CustomerSubResource($this->customer),
-            'city' => $this->city,
-            'street' => $this->street,
-            'building' => $this->building,
-            'floor' => $this->floor,
-            'flat' => $this->flat
-        ];
+        if(empty($this['errors'])) {
+            $toReturn = parent::toArray($request);
+            $data = $this['data'];
+
+            $toReturn['data'] = [
+                'id' => $data->id,
+                'customer' => new CustomerSubResource($data->customer),
+                'city' => $data->city,
+                'street' => $data->street,
+                'building' => $data->building,
+                'floor' => $data->floor,
+                'flat' => $data->flat
+            ];
+        }
+        else
+        {
+            $toReturn['data'] = null;
+            $toReturn['errors'] = $this['errors'];
+        }
+        
         return $toReturn;
     }
 }

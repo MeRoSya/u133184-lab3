@@ -455,10 +455,6 @@ paths:
                 properties:
                   data:
                     $ref: "#/components/schemas/Address"
-                  errors:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Error"
                   meta:
                     type: object
         "400":
@@ -476,10 +472,8 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
-                  meta:
-                    type: object
         "404":
-          description: No orders found
+          description: The address not found
           content:
             application/json:
               schema:
@@ -493,8 +487,6 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
-                  meta:
-                    type: object
         "500":
           description: "Internal server error"
           content:
@@ -510,8 +502,6 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
-                  meta:
-                    type: object
 
 components:
   schemas:

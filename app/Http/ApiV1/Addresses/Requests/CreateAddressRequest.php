@@ -10,13 +10,13 @@ class CreateAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['integer'],
-            'customer_id' => ['present'],
-            'city' => ['string'],
-            'street' => ['string'],
-            'building' => ['string'],
-            'floor' => ['integer'],
-            'flat' => ['string']
+            'id' => ['integer', 'required'],
+            'customer_id' => ['present', 'required'],
+            'city' => ['string', 'required'],
+            'street' => ['string', 'required'],
+            'building' => ['string', 'required'],
+            'floor' => ['integer', 'required'],
+            'flat' => ['string', 'required']
         ];
     }
 }
