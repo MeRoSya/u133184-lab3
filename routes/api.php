@@ -17,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::post('/v1/addresses', 'App\Http\ApiV1\Addresses\Controllers\AddressController@create');
 
 Route::put('/v1/addresses/{id}', 'App\Http\ApiV1\Addresses\Controllers\AddressController@replace');
+
+Route::get('v1/customers', 'App\Http\ApiV1\Customers\Controllers\CustomerController@list');

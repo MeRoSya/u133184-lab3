@@ -17,18 +17,13 @@ paths:
       parameters:
         - name: include
           in: query
-          description: Which children should be included
+          description: Which children should be included (orders, addresses or both)
           required: false
           schema:
-            type: array
-            items:
-              enum:
-                - orders
-                - addresses
-              type: string
+            type: string
       responses:
         "200":
-          description: An array of customers
+          description: An array of customers (including requested childs)
           content:
             application/json:
               schema:
@@ -48,27 +43,8 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
-                  meta:
-                    type: object
-        "404":
-          description: No customers found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: string
-                    enum:
-                      - null
-                  errors:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Error"
-                  meta:
-                    type: object
         "500":
-          description: "Internal server error"
+          description: Internal server error
           content:
             application/json:
               schema:
@@ -82,8 +58,6 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
-                  meta:
-                    type: object
   /orders:
     post:
       summary: Create an order

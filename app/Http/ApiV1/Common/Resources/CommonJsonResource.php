@@ -9,9 +9,7 @@ class CommonJsonResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'data' => null,
-            'errors' => []
+            'data' => null
         ];
     }
-
 }
