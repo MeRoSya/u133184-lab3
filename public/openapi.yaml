@@ -5,7 +5,7 @@ info:
   contact:
     email: zhuga200117@gmail.com
 servers:
-  - url: http://u133184-lab3.local/v1
+  - url: http://u133184-lab3.local/api/v1
 
 paths:
   /customers:
@@ -335,7 +335,7 @@ paths:
                       $ref: "#/components/schemas/Error"
                   meta:
                     type: object
-  /addresses/{id}:
+  /addresses:
     post:
       summary: Create an address
       operationId: createAddress
@@ -428,6 +428,7 @@ paths:
                       $ref: "#/components/schemas/Error"
                   meta:
                     type: object
+  /addresses/{id}:
     put:
       summary: Replace an address
       operationId: replaceAddress
