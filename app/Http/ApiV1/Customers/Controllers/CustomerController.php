@@ -9,9 +9,10 @@ use App\Http\ApiV1\Customers\Resources\CustomersJsonResource;
 
 class CustomerController
 {
-    public function list(GetCustomersRequest $request,
-                            GetCustomersAction $action): \Illuminate\Http\JsonResponse
-    {
+    public function list(
+        GetCustomersRequest $request,
+        GetCustomersAction $action
+    ): \Illuminate\Http\JsonResponse {
         $toReturn = null;
 
         $result = [];
@@ -19,8 +20,7 @@ class CustomerController
         try {
             $result['data'] = $action->execute($request->validated());
             $toReturn = (new CustomersJsonResource($result))->response()->setStatusCode(200);
-        } catch (\Exception $ex)
-        {
+        } catch (\Exception $ex) {
             $result['errors'][] = [new ErrorJsonResource($ex)];
             $toReturn = (new CustomersJsonResource($result))->response()->setStatusCode(500);
         }

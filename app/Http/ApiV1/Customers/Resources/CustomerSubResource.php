@@ -5,7 +5,10 @@ namespace App\Http\ApiV1\Customers\Resources;
 use App\Domain\Customers\Models\Customer;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-/** @mixin Customer */
+/**
+ * Used when customer should be inserted in another object 
+ * @mixin Customer
+ */
 class CustomerSubResource extends JsonResource
 {
     public function toArray($request)

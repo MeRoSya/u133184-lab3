@@ -2,9 +2,14 @@
 
 namespace App\Http\ApiV1\Orders\Resources;
 
+use App\Domain\Customers\Models\Order;
 use App\Http\ApiV1\Addresses\Resources\AddressSubResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/** 
+ * Used when order should be inserted in another object 
+ * @mixin Order 
+ * */
 class OrderSubResource extends JsonResource
 {
     public function toArray($request)

@@ -14,21 +14,19 @@ use Illuminate\Support\ItemNotFoundException;
 
 class OrderController
 {
-    public function create(CreateOrderRequest $request,
-                           CreateOrderAction $action): \Illuminate\Http\JsonResponse
-    {
+    public function create(
+        CreateOrderRequest $request,
+        CreateOrderAction $action
+    ): \Illuminate\Http\JsonResponse {
         $toReturn = null;
 
         $result = [];
         $result['errors'] = [];
-        try
-        {
+        try {
             $result['data'] = $action->execute($request->validated());
 
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(200);
-        }
-        catch (\Exception $ex)
-        {
+        } catch (\Exception $ex) {
             $result['errors'][] = [new ErrorJsonResource($ex)];
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(500);
         }
@@ -36,27 +34,23 @@ class OrderController
         return $toReturn;
     }
 
-    public function change(int $orderId,
-                            ChangeOrderRequest $request,
-                            ChangeOrderAction $action): \Illuminate\Http\JsonResponse
-    {
+    public function change(
+        int $orderId,
+        ChangeOrderRequest $request,
+        ChangeOrderAction $action
+    ): \Illuminate\Http\JsonResponse {
         $toReturn = null;
 
         $result = [];
         $result['errors'] = [];
-        try
-        {
+        try {
             $result['data'] = $action->execute($orderId, $request->validated());
 
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(200);
-        }
-        catch (ItemNotFoundException $ex)
-        {
+        } catch (ItemNotFoundException $ex) {
             $result['errors'][] = [new ErrorJsonResource($ex)];
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(404);
-        }
-        catch (\Exception $ex)
-        {
+        } catch (\Exception $ex) {
             $result['errors'][] = [new ErrorJsonResource($ex)];
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(500);
         }
@@ -64,22 +58,20 @@ class OrderController
         return $toReturn;
     }
 
-    public function delete(int $orderId,
-                           DeleteOrderRequest $request,
-                           DeleteOrderAction $action): \Illuminate\Http\JsonResponse
-    {
+    public function delete(
+        int $orderId,
+        DeleteOrderRequest $request,
+        DeleteOrderAction $action
+    ): \Illuminate\Http\JsonResponse {
         $toReturn = null;
 
         $result = [];
         $result['errors'] = [];
-        try
-        {
+        try {
             $result['data'] = $action->execute($orderId);
 
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(200);
-        }
-        catch (\Exception $ex)
-        {
+        } catch (\Exception $ex) {
             $result['errors'][] = [new ErrorJsonResource($ex)];
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(500);
         }

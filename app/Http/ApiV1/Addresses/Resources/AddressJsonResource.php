@@ -4,7 +4,6 @@ namespace App\Http\ApiV1\Addresses\Resources;
 
 use App\Http\ApiV1\Common\Resources\CommonJsonResource;
 use App\Http\ApiV1\Customers\Resources\CustomerSubResource;
-use Illuminate\Http\Resources\Json\JsonResource;
 use App\Domain\Addresses\Models\Address;
 
 /** @mixin Address */
@@ -12,7 +11,7 @@ class AddressJsonResource extends CommonJsonResource
 {
     public function toArray($request)
     {
-        if(empty($this['errors'])) {
+        if (empty($this['errors'])) {
             $toReturn = parent::toArray($request);
             $data = $this['data'];
 
@@ -25,13 +24,11 @@ class AddressJsonResource extends CommonJsonResource
                 'floor' => $data->floor,
                 'flat' => $data->flat
             ];
-        }
-        else
-        {
+        } else {
             $toReturn['data'] = null;
             $toReturn['errors'] = $this['errors'];
         }
-        
+
         return $toReturn;
     }
 }

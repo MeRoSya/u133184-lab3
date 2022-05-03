@@ -11,7 +11,7 @@ class ReplaceAddressAction
     {
         $address = Address::all()->find($addressId);
 
-        if(!is_null($address))
+        if (!is_null($address))
             $address->update($fields);
         else
             throw new ItemNotFoundException("Address not found");

@@ -52,10 +52,11 @@ class Handler extends ExceptionHandler
 
     public function invalidJson($request, ValidationException $exception)
     {
-        
-        return response()->json([
-            'data' => null,
-            'errors' => [new ErrorJsonResource($exception)]
+
+        return response()->json(
+            [
+                'data' => null,
+                'errors' => [new ErrorJsonResource($exception)]
             ]
         )->setStatusCode(400);
     }

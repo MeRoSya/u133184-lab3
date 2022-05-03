@@ -12,21 +12,19 @@ use Illuminate\Support\ItemNotFoundException;
 
 class AddressController
 {
-    public function create(CreateAddressRequest $request,
-                            CreateAddressAction $action)
-    {
+    public function create(
+        CreateAddressRequest $request,
+        CreateAddressAction $action
+    ): \Illuminate\Http\JsonResponse {
         $toReturn = null;
 
         $result = [];
         $result['errors'] = [];
-        try
-        {
+        try {
             $result['data'] = $action->execute($request->validated());
 
             $toReturn = (new AddressJsonResource($result))->response()->setStatusCode(200);
-        }
-        catch (\Exception $ex)
-        {
+        } catch (\Exception $ex) {
             $result['errors'][] = [new ErrorJsonResource($ex)];
             $toReturn = (new AddressJsonResource($result))->response()->setStatusCode(500);
         }
@@ -34,27 +32,23 @@ class AddressController
         return $toReturn;
     }
 
-    public function replace(int $addressId,
-                           ReplaceAddressRequest $request,
-                           ReplaceAddressAction $action): \Illuminate\Http\JsonResponse
-    {
+    public function replace(
+        int $addressId,
+        ReplaceAddressRequest $request,
+        ReplaceAddressAction $action
+    ): \Illuminate\Http\JsonResponse {
         $toReturn = null;
 
         $result = [];
         $result['errors'] = [];
-        try
-        {
+        try {
             $result['data'] = $action->execute($addressId, $request->validated());
 
             $toReturn = (new AddressJsonResource($result))->response()->setStatusCode(200);
-        }
-        catch (ItemNotFoundException $ex)
-        {
+        } catch (ItemNotFoundException $ex) {
             $result['errors'][] = [new ErrorJsonResource($ex)];
             $toReturn = (new AddressJsonResource($result))->response()->setStatusCode(404);
-        }
-        catch (\Exception $ex)
-        {
+        } catch (\Exception $ex) {
             $result['errors'][] = [new ErrorJsonResource($ex)];
             $toReturn = (new AddressJsonResource($result))->response()->setStatusCode(500);
         }

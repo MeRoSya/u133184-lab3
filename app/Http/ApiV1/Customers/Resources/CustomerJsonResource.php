@@ -6,6 +6,7 @@ use App\Http\ApiV1\Addresses\Resources\AddressSubResource;
 use App\Http\ApiV1\Orders\Resources\OrderSubResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/** @mixin Customer */
 class CustomerJsonResource extends JsonResource
 {
     public function toArray($request)
@@ -15,8 +16,7 @@ class CustomerJsonResource extends JsonResource
             'name' => $this->name
         ];
 
-        if(str_contains($request->include, 'addresses'))
-        {
+        if (str_contains($request->include, 'addresses')) {
             $addresses = [];
 
             foreach ($this->addresses as $address)
@@ -25,8 +25,7 @@ class CustomerJsonResource extends JsonResource
             $toReturn['addresses'] = $addresses;
         }
 
-        if(str_contains($request->include, 'orders'))
-        {
+        if (str_contains($request->include, 'orders')) {
             $orders = [];
 
             foreach ($this->orders as $order)

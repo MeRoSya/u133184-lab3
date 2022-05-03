@@ -11,7 +11,7 @@ class ChangeOrderAction
     {
         $order = Order::all()->find($orderId);
 
-        if(!is_null($order))
+        if (!is_null($order))
             $order->update($fields);
         else
             throw new ItemNotFoundException("Address not found");

@@ -8,7 +8,7 @@ class CustomersJsonResource extends CommonJsonResource
 {
     public function toArray($request)
     {
-        if(empty($this['errors'])) {
+        if (empty($this['errors'])) {
             $toReturn = parent::toArray($request);
 
             $data = $this['data'];
@@ -26,9 +26,7 @@ class CustomersJsonResource extends CommonJsonResource
             $toReturn['meta']['pagination']['per_page'] = $data->perPage();
             $toReturn['meta']['pagination']['total'] = $data->total();
             $toReturn['meta']['pagination']['current_page'] = $data->currentPage();
-        }
-        else
-        {
+        } else {
             $toReturn['data'] = null;
             $toReturn['errors'] = $this['errors'];
         }

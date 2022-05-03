@@ -10,7 +10,7 @@ class DeleteOrderAction
     {
         $order = Order::all()->find($orderId);
 
-        if(!is_null($order))
+        if (!is_null($order))
             $order->delete();
 
         return null;

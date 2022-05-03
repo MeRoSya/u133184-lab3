@@ -2,19 +2,21 @@
 
 namespace App\Http\ApiV1\Orders\Resources;
 
+use App\Domain\Customers\Models\Order;
 use App\Http\ApiV1\Addresses\Resources\AddressSubResource;
 use App\Http\ApiV1\Common\Resources\CommonJsonResource;
 use App\Http\ApiV1\Customers\Resources\CustomerSubResource;
 
+/** @mixin Order */
 class OrderJsonResource extends CommonJsonResource
 {
     public function toArray($request)
     {
-        if(empty($this['errors'])) {
+        if (empty($this['errors'])) {
             $toReturn = parent::toArray($request);
             $data = $this['data'];
 
-            if(is_null($data))
+            if (is_null($data))
                 $toReturn['data'] = null;
             else
                 $toReturn['data'] = [
@@ -27,9 +29,7 @@ class OrderJsonResource extends CommonJsonResource
                     'payed' => $data->payed,
                     'delivered' => $data->delivered
                 ];
-        }
-        else
-        {
+        } else {
             $toReturn['data'] = null;
             $toReturn['errors'] = $this['errors'];
         }

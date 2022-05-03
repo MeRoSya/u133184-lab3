@@ -9,13 +9,12 @@ class ReplaceAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['integer'],
-            'customer_id' => ['present'],
-            'city' => ['string'],
-            'street' => ['string'],
-            'building' => ['string'],
-            'floor' => ['integer'],
-            'flat' => ['string']
+            'customer_id' => ['present', 'required'],
+            'city' => ['string', 'required'],
+            'street' => ['string', 'required'],
+            'building' => ['string', 'required'],
+            'floor' => ['integer', 'required'],
+            'flat' => ['string', 'required']
         ];
     }
 }
