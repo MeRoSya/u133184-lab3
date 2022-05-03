@@ -119,8 +119,6 @@ paths:
                 properties:
                   data:
                     $ref: "#/components/schemas/Order"
-                  meta:
-                    type: object
         "400":
           description: Missing some required parameters
           content:
@@ -136,25 +134,6 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
-                  meta:
-                    type: object
-        "404":
-          description: No orders found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: string
-                    enum:
-                      - null
-                  errors:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Error"
-                  meta:
-                    type: object
         "500":
           description: "Internal server error"
           content:
@@ -170,8 +149,6 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
-                  meta:
-                    type: object
   /orders/{id}:
     patch:
       summary: Change an order
@@ -233,12 +210,6 @@ paths:
                 properties:
                   data:
                     $ref: "#/components/schemas/Order"
-                  errors:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Error"
-                  meta:
-                    type: object
         "404":
           description: The order not found
           content:
@@ -254,8 +225,6 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
-                  meta:
-                    type: object
         "500":
           description: "Internal server error"
           content:
@@ -271,8 +240,6 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
-                  meta:
-                    type: object
     delete:
       summary: Delete an order
       operationId: deleteOrder
@@ -290,8 +257,6 @@ paths:
                     enum:
                       - null
                     type: string
-                  meta:
-                    type: object
         "500":
           description: "Internal server error"
           content:
@@ -307,8 +272,6 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
-                  meta:
-                    type: object
   /addresses:
     post:
       summary: Create an address

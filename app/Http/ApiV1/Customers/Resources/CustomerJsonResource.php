@@ -3,6 +3,7 @@
 namespace App\Http\ApiV1\Customers\Resources;
 
 use App\Http\ApiV1\Addresses\Resources\AddressSubResource;
+use App\Http\ApiV1\Orders\Resources\OrderSubResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CustomerJsonResource extends JsonResource
@@ -29,7 +30,7 @@ class CustomerJsonResource extends JsonResource
             $orders = [];
 
             foreach ($this->orders as $order)
-                $orders[] = new AddressSubResource($order);
+                $orders[] = new OrderSubResource($order);
 
             $toReturn['orders'] = $orders;
         }
