@@ -136,7 +136,7 @@ paths:
           schema:
             type: boolean
       responses:
-        "200":
+        "201":
           description: The order created
           content:
             application/json:
@@ -379,7 +379,7 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        "201":
           description: New address
           content:
             application/json:
