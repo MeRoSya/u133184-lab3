@@ -25,7 +25,7 @@ class OrderController
         try {
             $result['data'] = $action->execute($request->validated());
 
-            $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(200);
+            $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(201);
         } catch (\Exception $ex) {
             $result['errors'] = [new ErrorJsonResource($ex)];
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(500);
