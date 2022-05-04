@@ -19,16 +19,17 @@ beforeEach(function () {
 test('Can create orders', function () {
     $responce = $this->postJson('/api/v1/orders?address_id=1&customer_id=1&creation_time=2022-05-04T11:56:40.084Z&deliver_before=2022-05-04T11:56:40.084Z&cost=121312&payed=1&delivered=0');
     $responce->assertStatus(201)
-        ->assertJson(fn (AssertableJson $json) =>
-        $json->has('data', fn (AssertableJson $json) =>
+        ->assertJson(
+            fn (AssertableJson $json) =>
+            $json->has('data', fn (AssertableJson $json) =>
             $json->has('id')
-                 ->has('customer')
-                 ->has('address')
-                 ->where('creation_time', '2022-05-04T11:56:40.084Z')
-                 ->where('deliver_before', '2022-05-04T11:56:40.084Z')
-                 ->where('cost', '121312')
-                 ->where('payed', '1')
-                 ->where('delivered', '0'))
+                ->has('customer')
+                ->has('address')
+                ->where('creation_time', '2022-05-04T11:56:40.084Z')
+                ->where('deliver_before', '2022-05-04T11:56:40.084Z')
+                ->where('cost', '121312')
+                ->where('payed', '1')
+                ->where('delivered', '0'))
         );
 });
 
@@ -47,16 +48,17 @@ test("Can't create orders without some args", function () {
 test('Can patch orders', function () {
     $responce = $this->patchJson('/api/v1/orders/1?address_id=1&customer_id=1&creation_time=2022-05-04T11:56:40.084Z&deliver_before=2022-05-04T11:56:40.084Z&cost=121312&payed=1&delivered=0');
     $responce->assertStatus(200)
-        ->assertJson(fn (AssertableJson $json) =>
-        $json->has('data', fn (AssertableJson $json) =>
-        $json->has('id')
-            ->has('customer')
-            ->has('address')
-            ->where('creation_time', '2022-05-04T11:56:40.084Z')
-            ->where('deliver_before', '2022-05-04T11:56:40.084Z')
-            ->where('cost', '121312')
-            ->where('payed', '1')
-            ->where('delivered', '0'))
+        ->assertJson(
+            fn (AssertableJson $json) =>
+            $json->has('data', fn (AssertableJson $json) =>
+            $json->has('id')
+                ->has('customer')
+                ->has('address')
+                ->where('creation_time', '2022-05-04T11:56:40.084Z')
+                ->where('deliver_before', '2022-05-04T11:56:40.084Z')
+                ->where('cost', '121312')
+                ->where('payed', '1')
+                ->where('delivered', '0'))
         );
 });
 

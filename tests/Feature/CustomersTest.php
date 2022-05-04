@@ -19,60 +19,65 @@ beforeEach(function () {
 test('Can get customers', function () {
     $responce = $this->getJson('/api/v1/customers');
     $responce->assertStatus(200)
-        ->assertJson(fn (AssertableJson $json) =>
-        $json->has('data')
-            ->has('data.0', fn (AssertableJson $json) =>
-            $json->has('id')->has('name'))->has('meta')
+        ->assertJson(
+            fn (AssertableJson $json) =>
+            $json->has('data')
+                ->has('data.0', fn (AssertableJson $json) =>
+                $json->has('id')->has('name'))->has('meta')
         );
 });
 
 test('Can get customers with addresses', function () {
     $responce = $this->getJson('/api/v1/customers?include=addresses');
     $responce->assertStatus(200)
-        ->assertJson(fn (AssertableJson $json) =>
-        $json->has('data')
-            ->has('data.0', fn (AssertableJson $json) =>
-            $json->has('id')
-                ->has('name')
-                ->has('addresses'))->has('meta')
+        ->assertJson(
+            fn (AssertableJson $json) =>
+            $json->has('data')
+                ->has('data.0', fn (AssertableJson $json) =>
+                $json->has('id')
+                    ->has('name')
+                    ->has('addresses'))->has('meta')
         );
 });
 
 test('Can get customers with orders', function () {
     $responce = $this->getJson('/api/v1/customers?include=orders');
     $responce->assertStatus(200)
-        ->assertJson(fn (AssertableJson $json) =>
-        $json->has('data')
-            ->has('data.0', fn (AssertableJson $json) =>
-            $json->has('id')
-                ->has('name')
-                ->has('orders'))->has('meta')
+        ->assertJson(
+            fn (AssertableJson $json) =>
+            $json->has('data')
+                ->has('data.0', fn (AssertableJson $json) =>
+                $json->has('id')
+                    ->has('name')
+                    ->has('orders'))->has('meta')
         );
 });
 
 test('Can get customers with orders and addresses', function () {
     $responce = $this->getJson('/api/v1/customers?include=orders, addresses');
     $responce->assertStatus(200)
-        ->assertJson(fn (AssertableJson $json) =>
-        $json->has('data')
-            ->has('data.0', fn (AssertableJson $json) =>
-            $json->has('id')
-                ->has('name')
-                ->has('orders')
-                ->has('addresses'))->has('meta')
+        ->assertJson(
+            fn (AssertableJson $json) =>
+            $json->has('data')
+                ->has('data.0', fn (AssertableJson $json) =>
+                $json->has('id')
+                    ->has('name')
+                    ->has('orders')
+                    ->has('addresses'))->has('meta')
         );
 });
 
 test('Can get customers with addresses and orders', function () {
     $responce = $this->getJson('/api/v1/customers?include=addresses, orders');
     $responce->assertStatus(200)
-        ->assertJson(fn (AssertableJson $json) =>
-        $json->has('data')
-            ->has('data.0', fn (AssertableJson $json) =>
-            $json->has('id')
-                ->has('name')
-                ->has('orders')
-                ->has('addresses'))->has('meta')
+        ->assertJson(
+            fn (AssertableJson $json) =>
+            $json->has('data')
+                ->has('data.0', fn (AssertableJson $json) =>
+                $json->has('id')
+                    ->has('name')
+                    ->has('orders')
+                    ->has('addresses'))->has('meta')
         );
 });
 

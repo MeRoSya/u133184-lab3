@@ -19,15 +19,16 @@ beforeEach(function () {
 test('Can create address', function () {
     $responce = $this->postJson('/api/v1/addresses?customer_id=1&city=test&street=test&building=test&floor=1&flat=test');
     $responce->assertStatus(201)
-        ->assertJson(fn (AssertableJson $json) =>
-        $json->has('data', fn (AssertableJson $json) =>
+        ->assertJson(
+            fn (AssertableJson $json) =>
+            $json->has('data', fn (AssertableJson $json) =>
             $json->has('id')
-                 ->has('customer')
-                 ->where('city', 'test')
-                 ->where('street', 'test')
-                 ->where('building', 'test')
-                 ->where('floor', '1')
-                 ->where('flat', 'test'))
+                ->has('customer')
+                ->where('city', 'test')
+                ->where('street', 'test')
+                ->where('building', 'test')
+                ->where('floor', '1')
+                ->where('flat', 'test'))
         );
 });
 
@@ -46,15 +47,16 @@ test("Can't create address without some args", function () {
 test('Can change address', function () {
     $responce = $this->putJson('/api/v1/addresses/1?customer_id=1&city=test&street=test&building=test&floor=1&flat=test');
     $responce->assertStatus(200)
-        ->assertJson(fn (AssertableJson $json) =>
-        $json->has('data', fn (AssertableJson $json) =>
-        $json->has('id')
-            ->has('customer')
-            ->where('city', 'test')
-            ->where('street', 'test')
-            ->where('building', 'test')
-            ->where('floor', '1')
-            ->where('flat', 'test'))
+        ->assertJson(
+            fn (AssertableJson $json) =>
+            $json->has('data', fn (AssertableJson $json) =>
+            $json->has('id')
+                ->has('customer')
+                ->where('city', 'test')
+                ->where('street', 'test')
+                ->where('building', 'test')
+                ->where('floor', '1')
+                ->where('flat', 'test'))
         );
 });
 
