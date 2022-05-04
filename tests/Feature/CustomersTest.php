@@ -11,6 +11,7 @@ uses(RefreshDatabase::class);
 uses()->group('customers');
 
 beforeEach(function () {
+    Artisan::call('migrate:rollback');
     Artisan::call('migrate');
     Artisan::call('db:seed');
 });
@@ -90,7 +91,6 @@ test("Can't get customers with invalid include", function () {
 test("Internal server error", function () {
     Artisan::call('migrate:rollback');
     $responce = $this->getJson('/api/v1/customers');
-    $responce->dump();
     $responce->assertStatus(500)
         ->assertJson(fn (AssertableJson $json) =>
         $json->where('data', null)
