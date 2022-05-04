@@ -25,7 +25,7 @@ class AddressController
 
             $toReturn = (new AddressJsonResource($result))->response()->setStatusCode(200);
         } catch (\Exception $ex) {
-            $result['errors'][] = [new ErrorJsonResource($ex)];
+            $result['errors'] = [new ErrorJsonResource($ex)];
             $toReturn = (new AddressJsonResource($result))->response()->setStatusCode(500);
         }
 
@@ -49,7 +49,7 @@ class AddressController
             $result['errors'][] = [new ErrorJsonResource($ex)];
             $toReturn = (new AddressJsonResource($result))->response()->setStatusCode(404);
         } catch (\Exception $ex) {
-            $result['errors'][] = [new ErrorJsonResource($ex)];
+            $result['errors'] = [new ErrorJsonResource($ex)];
             $toReturn = (new AddressJsonResource($result))->response()->setStatusCode(500);
         }
 

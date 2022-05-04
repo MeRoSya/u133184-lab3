@@ -27,7 +27,7 @@ class OrderController
 
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(200);
         } catch (\Exception $ex) {
-            $result['errors'][] = [new ErrorJsonResource($ex)];
+            $result['errors'] = [new ErrorJsonResource($ex)];
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(500);
         }
 
@@ -48,10 +48,10 @@ class OrderController
 
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(200);
         } catch (ItemNotFoundException $ex) {
-            $result['errors'][] = [new ErrorJsonResource($ex)];
+            $result['errors'] = [new ErrorJsonResource($ex)];
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(404);
         } catch (\Exception $ex) {
-            $result['errors'][] = [new ErrorJsonResource($ex)];
+            $result['errors'] = [new ErrorJsonResource($ex)];
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(500);
         }
 
@@ -72,7 +72,7 @@ class OrderController
 
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(200);
         } catch (\Exception $ex) {
-            $result['errors'][] = [new ErrorJsonResource($ex)];
+            $result['errors'] = [new ErrorJsonResource($ex)];
             $toReturn = (new OrderJsonResource($result))->response()->setStatusCode(500);
         }
 
