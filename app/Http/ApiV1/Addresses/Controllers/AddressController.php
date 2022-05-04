@@ -46,7 +46,7 @@ class AddressController
 
             $toReturn = (new AddressJsonResource($result))->response()->setStatusCode(200);
         } catch (ItemNotFoundException $ex) {
-            $result['errors'][] = [new ErrorJsonResource($ex)];
+            $result['errors'] = [new ErrorJsonResource($ex)];
             $toReturn = (new AddressJsonResource($result))->response()->setStatusCode(404);
         } catch (\Exception $ex) {
             $result['errors'] = [new ErrorJsonResource($ex)];
