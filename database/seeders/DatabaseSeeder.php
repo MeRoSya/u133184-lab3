@@ -26,11 +26,11 @@ class DatabaseSeeder extends Seeder
             return $namespace . $modelName . 'Factory';
         });
 
-        Customer::factory(100)->create()
+        Customer::factory(50)->create()
             ->each(function ($customer) {
                 $addresses = Address::factory(rand(1, 4))->make();
 
-                $orders = Order::factory(rand(1, 100))->make();
+                $orders = Order::factory(rand(1, 10))->make();
 
                 foreach ($addresses as $address)
                     $customer->addresses()->save($address);
