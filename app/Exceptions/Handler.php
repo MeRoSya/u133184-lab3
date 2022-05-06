@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Http\ApiV1\Common\Resources\ErrorJsonResource;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -46,5 +48,16 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function invalidJson($request, ValidationException $exception)
+    {
+
+        return response()->json(
+            [
+                'data' => null,
+                'errors' => [new ErrorJsonResource($exception)]
+            ]
+        )->setStatusCode(400);
     }
 }
